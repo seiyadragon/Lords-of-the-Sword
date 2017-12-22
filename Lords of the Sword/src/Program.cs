@@ -14,7 +14,7 @@ namespace Lords_of_the_Sword
     class Program
     {
         public static RenderWindow Window;
-        public static View MainCamera;
+        public static View Idk;
 
         static void Main(string[] args)
         {
