@@ -11,22 +11,26 @@ using SFML.Audio;
 
 namespace Lords_of_the_Sword.Map
 {
-    class Tile
+    class Map
     {
         public Vector2f Position;
-        public TileType Type;
-        public Sprite DrawSprite;
 
-        public Tile(Vector2f pos, TileType type)
+        public Tile[] Tiles;
+
+        public Map(Vector2f pos, Tile[] tiles)
         {
             Position = pos;
-            Type = type;
-            DrawSprite = TileTools.getTileTypeTexture(Type);
+
+            Tiles = tiles;
+
+            for (int i = 0; i < Tiles.Length; i++)
+                Tiles[i].DrawSprite.Position = new Vector2f(Tiles[i].Position.X, Tiles[i].Position.Y);
         }
 
         public void update(RenderWindow Window)
         {
-            Window.Draw(DrawSprite);
+            for (int i = 0; i < Tiles.Length; i++)
+                Tiles[i].update(Window);
         }
     }
 }
