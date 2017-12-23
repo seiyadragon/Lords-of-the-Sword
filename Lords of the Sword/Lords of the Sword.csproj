@@ -56,12 +56,15 @@
   <ItemGroup>
     <Compile Include="src\Map\Map.cs" />
     <Compile Include="src\Map\Tile.cs" />
-    <Compile Include="src\Map\TileType.cs" />
+    <Compile Include="src\Map\TileTools.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="res\Main.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Credits.txt" />

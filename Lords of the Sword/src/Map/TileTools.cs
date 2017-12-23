@@ -32,10 +32,10 @@ namespace Lords_of_the_Sword.Map
 
         public static Vector2f GrasslandTexture = new Vector2f(0, 0);
         public static Vector2f ForestTexture = new Vector2f(32 * 2, 0);
-        public static Vector2f OceanTexture = new Vector2f();
-        public static Vector2f TownTexture = new Vector2f();
-        public static Vector2f CastleTexture = new Vector2f();
-        public static Vector2f CityTexture = new Vector2f();
+        public static Vector2f OceanTexture = new Vector2f(32 * 6, 0);
+        public static Vector2f TownTexture = new Vector2f(0, 48);
+        public static Vector2f CastleTexture = new Vector2f(32, 48);
+        public static Vector2f CityTexture = new Vector2f(32 * 2, 48);
 
         public static Vector2f getTileTypeTextureCoords(TileType type)
         {

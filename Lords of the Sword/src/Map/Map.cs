@@ -24,7 +24,7 @@ namespace Lords_of_the_Sword.Map
             Tiles = tiles;
 
             for (int i = 0; i < Tiles.Length; i++)
-                Tiles[i].DrawSprite.Position = new Vector2f(Position.X + 32 * Tiles[i].Position.X, Position.Y + 48 * Tiles[i].Position.Y);
+                Tiles[i].DrawSprite.Position = new Vector2f(Position.X + 64 * Tiles[i].Position.X, Position.Y + 96 * Tiles[i].Position.Y);
         }
 
         public void update(RenderWindow Window)

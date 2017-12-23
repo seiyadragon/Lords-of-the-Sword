@@ -23,6 +23,13 @@ namespace Lords_of_the_Sword.Map
             Type = type;
             DrawSprite.Texture = TileTools.TileMap;
             DrawSprite.TextureRect = new IntRect((Vector2i)TileTools.getTileTypeTextureCoords(type), new Vector2i(32, 48));
+            DrawSprite.Scale = new Vector2f(2, 2);
+        }
+
+        public void setType(TileType type)
+        {
+            Type = type;
+            DrawSprite.TextureRect = new IntRect((Vector2i)TileTools.getTileTypeTextureCoords(type), new Vector2i(32, 48));
         }
 
         public void update(RenderWindow Window)
