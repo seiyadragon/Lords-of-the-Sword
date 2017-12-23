@@ -9,7 +9,7 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
-namespace Lords_of_the_Sword.Map
+namespace Lords_of_the_Sword.Maps
 {
     enum TileType
     {
@@ -17,10 +17,6 @@ namespace Lords_of_the_Sword.Map
         Forest,
         Coast,
         Ocean,
-        Bandit_Camp,
-        Hunter_Camp,
-        Military_Camp,
-        Mercenary_Camp,
         Town,
         Castle,
         City

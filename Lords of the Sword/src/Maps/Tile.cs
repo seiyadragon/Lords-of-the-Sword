@@ -9,7 +9,7 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
-namespace Lords_of_the_Sword.Map
+namespace Lords_of_the_Sword.Maps
 {
     class Tile
     {

@@ -9,7 +9,7 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
-using Lords_of_the_Sword.Map;
+using Lords_of_the_Sword.Maps;
 
 namespace Lords_of_the_Sword
 {
@@ -25,7 +25,7 @@ namespace Lords_of_the_Sword
 
             Window.Closed += Window_Closed;
 
-            Map.Map m = createMap("res/Main.map");
+            Map m = createMap("res/Main.map");
 
             while (Window.IsOpen)
             {
@@ -73,7 +73,7 @@ namespace Lords_of_the_Sword
             return t;
         }
 
-        private static Map.Map createMap(string path)
+        private static Map createMap(string path)
         {
             Tile[][] t = new Tile[12][];
 
@@ -112,7 +112,7 @@ namespace Lords_of_the_Sword
                     array[i].setType(TileType.City);
             }
 
-            return new Map.Map(new Vector2f(15, 0), array);
+            return new Map(new Vector2f(15, 0), array);
         }
 
         private static void Window_Closed(object sender, EventArgs e)
