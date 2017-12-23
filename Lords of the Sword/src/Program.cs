@@ -25,13 +25,12 @@ namespace Lords_of_the_Sword
 
             Window.Closed += Window_Closed;
 
-            Tile[] t = new Tile[20 * 8];
+            Tile[][] t = new Tile[15][];
 
-            for (int x = 0; x < 20; x++)
-                for (int y = 0; y < 8; y++)
-                    t[x + y * 20] = new Tile(new Vector2f(x, y), TileType.Forest);
+            for (int i = 0; i < 15; i++)
+                t[i] = makeRow(i);
 
-            Map.Map m = new Map.Map(new Vector2f(0, 0), t);
+            Map.Map m = new Map.Map(new Vector2f(0, 0), combineTileArrays(15, t));
 
             while (Window.IsOpen)
             {
@@ -43,6 +42,40 @@ namespace Lords_of_the_Sword
                 Window.SetView(MainCamera);
                 Window.Display();
             }
+        }
+
+        private static Tile[] makeRow(int y)
+        {
+            Tile[] t = new Tile[40];
+
+            int num = 1;
+
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (num == 1)
+                {
+                    t[i] = new Tile(new Vector2f(i, y), TileType.Grassland);
+                    num = 2;
+                }
+
+                else if (num == 2)
+                {
+                    t[i] = new Tile(new Vector2f(i, y - 0.4f), TileType.Grassland);
+                    num = 1;
+                }
+            }
+
+            return t;
+        }
+
+        private static Tile[] combineTileArrays(int amountofarrays, Tile[][] arrays)
+        {
+            Tile[] t = arrays[0];
+
+            for (int i = 1; i < amountofarrays; i++)
+                t = t.Concat(arrays[i]).ToArray();
+
+            return t;
         }
 
         private static void Window_Closed(object sender, EventArgs e)

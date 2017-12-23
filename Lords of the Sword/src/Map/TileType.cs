@@ -28,31 +28,17 @@ namespace Lords_of_the_Sword.Map
 
     class TileTools
     {
-        static bool TileMapSeparation = false;
-        static Texture TileMap = new Texture("res/fantasyhextiles_v2.png");
+        public static Texture TileMap = new Texture("res/fantasyhextiles_v2.png");
 
-        public static Sprite GrasslandTexture = new Sprite();
-        public static Sprite ForestTexture = new Sprite();
-        public static Sprite OceanTexture = new Sprite();
-        public static Sprite TownTexture = new Sprite();
-        public static Sprite CastleTexture = new Sprite();
-        public static Sprite CityTexture = new Sprite();
+        public static Vector2f GrasslandTexture = new Vector2f(0, 0);
+        public static Vector2f ForestTexture = new Vector2f(32 * 2, 0);
+        public static Vector2f OceanTexture = new Vector2f();
+        public static Vector2f TownTexture = new Vector2f();
+        public static Vector2f CastleTexture = new Vector2f();
+        public static Vector2f CityTexture = new Vector2f();
 
-        public static Sprite getTileTypeTexture(TileType type)
+        public static Vector2f getTileTypeTextureCoords(TileType type)
         {
-            if (!TileMapSeparation)
-            {
-                GrasslandTexture.Texture = TileMap;
-                GrasslandTexture.TextureRect = new IntRect(32 * 0, 48 * 0, 32, 48);
-                GrasslandTexture.Scale = new Vector2f(2, 2);
-
-                ForestTexture.Texture = TileMap;
-                ForestTexture.TextureRect = new IntRect(32 * 2, 48 * 0, 32, 48);
-                ForestTexture.Scale = new Vector2f(2, 2);
-
-                TileMapSeparation = true;
-            }
-
             if (type == TileType.Grassland)
                 return GrasslandTexture;
 
@@ -71,7 +57,7 @@ namespace Lords_of_the_Sword.Map
             if (type == TileType.City)
                 return CityTexture;
 
-            return null;
+            return new Vector2f();
         }
 
         public static bool isTileTypeEmpty(TileType type)

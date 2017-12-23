@@ -15,13 +15,14 @@ namespace Lords_of_the_Sword.Map
     {
         public Vector2f Position;
         public TileType Type;
-        public Sprite DrawSprite;
+        public Sprite DrawSprite = new Sprite();
 
         public Tile(Vector2f pos, TileType type)
         {
             Position = pos;
             Type = type;
-            DrawSprite = TileTools.getTileTypeTexture(Type);
+            DrawSprite.Texture = TileTools.TileMap;
+            DrawSprite.TextureRect = new IntRect((Vector2i)TileTools.getTileTypeTextureCoords(type), new Vector2i(32, 48));
         }
 
         public void update(RenderWindow Window)
