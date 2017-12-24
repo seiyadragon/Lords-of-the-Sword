@@ -60,14 +60,14 @@ namespace Lords_of_the_Sword.Maps
 
         private bool checkHovering(RenderWindow Window)
         {
-            Vector2i m = Mouse.GetPosition(Window);
+            Vector2i m = Program.MousePos;
 
             if (m.X > RectPos.X && m.X < RectPos.X + RectSize.X && m.Y > RectPos.Y && m.Y < RectPos.Y + RectSize.Y)
                 return true;
 
             Vector2f a = LeftTriPoint;
-            Vector2f b = RectPos;
-            Vector2f c = new Vector2f(RectPos.X, RectPos.Y + RectSize.Y);
+            Vector2f b = new Vector2f(RectPos.X, RectPos.Y + 2);
+            Vector2f c = new Vector2f(RectPos.X, RectPos.Y + 56);
 
             float s1 = c.Y - a.Y;
             float s2 = c.X - a.X;
@@ -80,14 +80,9 @@ namespace Lords_of_the_Sword.Maps
             if (w1 >= 0 && w2 >= 0 && (w1 + w2) <= 1)
                 return true;
 
-            a = RightTriPoint;
-            b = new Vector2f(RectPos.X + RectSize.X, RectPos.Y);
-            c = new Vector2f(RectPos.X + RectSize.X, RectPos.Y + RectSize.Y);
-
-            s1 = c.Y - a.Y;
-            s2 = c.X - a.X;
-            s3 = b.Y - a.Y;
-            s4 = m.Y - a.Y;
+            a = new Vector2f(RectPos.X + 32, RectPos.Y + 58);
+            b = new Vector2f(RectPos.X + 32, RectPos.Y + 1); ;
+            c = RightTriPoint;
 
             w1 = (a.X * s1 + s4 * s2 - m.X * s1) / (s3 * s2 - (b.X - a.X) * s1);
             w2 = (s4 - w1 * s3) / s1;

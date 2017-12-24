@@ -18,12 +18,20 @@ namespace Lords_of_the_Sword
         public static RenderWindow Window;
         public static View MainCamera;
 
+        public static Vector2i MousePos = new Vector2i();
+
+        private static bool[] MouseButtons = new bool[10];
+        private static bool[] MouseButtonsLast = new bool[10];
+
         static void Main(string[] args)
         {
             Window = new RenderWindow(new VideoMode(1280, 720), "Lords of the Sword", Styles.Default);
             MainCamera = new View(new FloatRect(0, 0, 1280, 720));
 
             Window.Closed += Window_Closed;
+            Window.MouseMoved += Window_MouseMoved;
+            Window.MouseButtonPressed += Window_MouseButtonPressed;
+            Window.MouseButtonReleased += Window_MouseButtonReleased;
 
             Map m = createMap("res/Main.map");
 
@@ -36,7 +44,45 @@ namespace Lords_of_the_Sword
 
                 Window.SetView(MainCamera);
                 Window.Display();
+
+                MouseButtonsLast = (bool[])MouseButtons.Clone();
             }
+        }
+
+        private static void Window_MouseButtonReleased(object sender, MouseButtonEventArgs e)
+        {
+            MouseButtons[(int)e.Button] = false;
+        }
+
+        private static void Window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
+        {
+            MouseButtons[(int)e.Button] = true;
+        }
+
+        private static void Window_MouseMoved(object sender, MouseMoveEventArgs e)
+        {
+            MousePos.X = e.X;
+            MousePos.Y = e.Y;
+        }
+
+        private static void Window_Closed(object sender, EventArgs e)
+        {
+            Window.Close();
+        }
+
+        public static bool isButtonPressed(int button)
+        {
+            return MouseButtons[button] && !MouseButtonsLast[button];
+        }
+
+        public static bool isButtonReleased(int button)
+        {
+            return !MouseButtons[button] && MouseButtonsLast[button];
+        }
+
+        public static bool isButtonHeld(int button)
+        {
+            return MouseButtons[button];
         }
 
         private static Tile[] makeRow(int y)
@@ -113,11 +159,6 @@ namespace Lords_of_the_Sword
             }
 
             return new Map(new Vector2f(15, 0), array);
-        }
-
-        private static void Window_Closed(object sender, EventArgs e)
-        {
-            Window.Close();
         }
     }
 }
