@@ -12,6 +12,7 @@ using SFML.Audio;
 using Lords_of_the_Sword.Maps;
 using Lords_of_the_Sword.src.Units;
 using Lords_of_the_Sword.src.Groups;
+using Lords_of_the_Sword.src.Gui;
 
 namespace Lords_of_the_Sword
 {
@@ -39,6 +40,8 @@ namespace Lords_of_the_Sword
             Window.MouseButtonPressed += Window_MouseButtonPressed;
             Window.MouseButtonReleased += Window_MouseButtonReleased;
 
+            TileMenu tm = new TileMenu();
+
             CurrentMap = createMap("res/Main.map");
             Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 10));
 
@@ -51,6 +54,8 @@ namespace Lords_of_the_Sword
 
                 for (int i = 0; i < Parties.Count; i++)
                     Parties[i].update(Window);
+
+                tm.update(Window);
 
                 Window.SetView(MainCamera);
                 Window.Display();

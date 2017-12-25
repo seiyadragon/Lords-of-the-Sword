@@ -11,6 +11,7 @@ using SFML.Audio;
 
 using Lords_of_the_Sword.src.Units;
 using Lords_of_the_Sword.Maps;
+using Lords_of_the_Sword.src.Gui;
 
 namespace Lords_of_the_Sword.src.Groups
 {
@@ -19,7 +20,7 @@ namespace Lords_of_the_Sword.src.Groups
         public List<Unit> Members = new List<Unit>();
         public Unit Leader;
 
-        RectangleShape Draw = new RectangleShape(new Vector2f(32, 32));
+        Sprite Draw = new Sprite();
 
         int CurrentTile;
 
@@ -29,9 +30,9 @@ namespace Lords_of_the_Sword.src.Groups
         {
             Leader = leader;
 
-            Draw.FillColor = Color.Blue;
+            Draw.Texture = new Texture("res/Flag.png");
 
-            move(tileID);
+            move(tileID, true);
         }
 
         public void update(RenderWindow Window)
@@ -46,16 +47,23 @@ namespace Lords_of_the_Sword.src.Groups
             Window.Draw(Draw);
         }
 
-        public void move(int tileID)
+        public void move(int tileID, bool ignoreAdjacent)
         {
+            bool adjacent = false;
+
+            for (int i = 0; i < Program.CurrentMap.Tiles[CurrentTile].AdjacentTiles.Length; i++)
+                if (Program.CurrentMap.Tiles[CurrentTile].AdjacentTiles[i] != null && Program.CurrentMap.Tiles[CurrentTile].AdjacentTiles[i].ID == tileID)
+                    adjacent = true;
+
+            if (!adjacent && !ignoreAdjacent)
+                return;
+
             CurrentTile = tileID;
-            Tile tile = null;
-
-            for (int i = 0; i < Program.CurrentMap.Tiles.Length; i++)
-                if (Program.CurrentMap.Tiles[i].ID == tileID)
-                    tile = Program.CurrentMap.Tiles[i];
-
+            Tile tile = Program.CurrentMap.Tiles[CurrentTile];
             Draw.Position = tile.PartyPos;
+
+            if (!TileTools.isTileTypeEmpty(tile.Type))
+                TileMenu.open(this, tile);
         }
 
         public void Camp()

@@ -1,0 +1,2 @@
+﻿The tile hovering system doesnt work with the whole tile only the center
+Sometimes the tiles dont see their adjacent tiles cuz they're gay af

@@ -9,6 +9,8 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
+using Lords_of_the_Sword.src.Gui;
+
 namespace Lords_of_the_Sword.Maps
 {
     class Tile
@@ -23,6 +25,10 @@ namespace Lords_of_the_Sword.Maps
         public Vector2f RectSize;
 
         public Vector2f PartyPos;
+
+        public bool isEmpty = true;
+
+        public Tile[] AdjacentTiles = new Tile[6];
 
         public int ID;
 
@@ -48,7 +54,7 @@ namespace Lords_of_the_Sword.Maps
         {
             Window.Draw(DrawSprite);
 
-            if (checkHovering(Window))
+            if (checkHovering(Window) && !TileMenu.isOpen)
                 hover(Window);
         }
 
@@ -57,7 +63,7 @@ namespace Lords_of_the_Sword.Maps
             Window.Draw(Selection);
 
             if (Program.isButtonPressed((int)Mouse.Button.Left))
-                Program.Parties[0].move(ID);
+                Program.Parties[0].move(ID, false);
         }
 
         private bool checkHovering(RenderWindow Window)
