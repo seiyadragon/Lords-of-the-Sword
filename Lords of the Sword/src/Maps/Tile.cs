@@ -21,8 +21,10 @@ namespace Lords_of_the_Sword.Maps
 
         public Vector2f RectPos;
         public Vector2f RectSize;
-        public Vector2f LeftTriPoint;
-        public Vector2f RightTriPoint;
+
+        public Vector2f PartyPos;
+
+        public int ID;
 
         public Tile(Vector2f pos, TileType type)
         {
@@ -54,40 +56,15 @@ namespace Lords_of_the_Sword.Maps
         {
             Window.Draw(Selection);
 
-            if (Mouse.IsButtonPressed(Mouse.Button.Left))
-                Console.WriteLine(Position);
+            if (Program.isButtonPressed((int)Mouse.Button.Left))
+                Program.Parties[0].move(ID);
         }
 
         private bool checkHovering(RenderWindow Window)
         {
-            Vector2i m = Program.MousePos;
+            Vector2f m = Program.MousePos;
 
             if (m.X > RectPos.X && m.X < RectPos.X + RectSize.X && m.Y > RectPos.Y && m.Y < RectPos.Y + RectSize.Y)
-                return true;
-
-            Vector2f a = LeftTriPoint;
-            Vector2f b = new Vector2f(RectPos.X, RectPos.Y + 2);
-            Vector2f c = new Vector2f(RectPos.X, RectPos.Y + 56);
-
-            float s1 = c.Y - a.Y;
-            float s2 = c.X - a.X;
-            float s3 = b.Y - a.Y;
-            float s4 = m.Y - a.Y;
-
-            float w1 = (a.X * s1 + s4 * s2 - m.X * s1) / (s3 * s2 - (b.X - a.X) * s1);
-            float w2 = (s4 - w1 * s3) / s1;
-
-            if (w1 >= 0 && w2 >= 0 && (w1 + w2) <= 1)
-                return true;
-
-            a = new Vector2f(RectPos.X + 32, RectPos.Y + 58);
-            b = new Vector2f(RectPos.X + 32, RectPos.Y + 1); ;
-            c = RightTriPoint;
-
-            w1 = (a.X * s1 + s4 * s2 - m.X * s1) / (s3 * s2 - (b.X - a.X) * s1);
-            w2 = (s4 - w1 * s3) / s1;
-
-            if (w1 >= 0 && w2 >= 0 && (w1 + w2) <= 1)
                 return true;
 
             return false;

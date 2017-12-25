@@ -30,8 +30,10 @@ namespace Lords_of_the_Sword.Maps
 
                 Tiles[i].RectSize = new Vector2f(30, 60);
                 Tiles[i].RectPos = new Vector2f(Tiles[i].DrawSprite.Position.X + 16, Tiles[i].DrawSprite.Position.Y + 36);
-                Tiles[i].LeftTriPoint = new Vector2f(Tiles[i].RectPos.X - 12, Tiles[i].RectPos.Y + 30);
-                Tiles[i].RightTriPoint = new Vector2f(Tiles[i].RectPos.X + 46, Tiles[i].RectPos.Y + 30);
+
+                Tiles[i].PartyPos = new Vector2f(Tiles[i].DrawSprite.Position.X + 18, Tiles[i].DrawSprite.Position.Y + 50);
+
+                Tiles[i].ID = i;
             }
         }
 

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Groups\Party.cs" />
+    <Compile Include="src\Gui\TileMenu.cs" />
     <Compile Include="src\Maps\Map.cs" />
     <Compile Include="src\Maps\Tile.cs" />
     <Compile Include="src\Maps\TileTools.cs" />

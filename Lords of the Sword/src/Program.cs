@@ -10,6 +10,8 @@ using SFML.Graphics;
 using SFML.Audio;
 
 using Lords_of_the_Sword.Maps;
+using Lords_of_the_Sword.src.Units;
+using Lords_of_the_Sword.src.Groups;
 
 namespace Lords_of_the_Sword
 {
@@ -18,10 +20,14 @@ namespace Lords_of_the_Sword
         public static RenderWindow Window;
         public static View MainCamera;
 
-        public static Vector2i MousePos = new Vector2i();
+        public static Vector2f MousePos = new Vector2f();
 
         private static bool[] MouseButtons = new bool[10];
         private static bool[] MouseButtonsLast = new bool[10];
+
+        public static List<Party> Parties = new List<Party>();
+
+        public static Map CurrentMap;
 
         static void Main(string[] args)
         {
@@ -33,14 +39,18 @@ namespace Lords_of_the_Sword
             Window.MouseButtonPressed += Window_MouseButtonPressed;
             Window.MouseButtonReleased += Window_MouseButtonReleased;
 
-            Map m = createMap("res/Main.map");
+            CurrentMap = createMap("res/Main.map");
+            Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 10));
 
             while (Window.IsOpen)
             {
                 Window.DispatchEvents();
                 Window.Clear();
 
-                m.update(Window);
+                CurrentMap.update(Window);
+
+                for (int i = 0; i < Parties.Count; i++)
+                    Parties[i].update(Window);
 
                 Window.SetView(MainCamera);
                 Window.Display();
@@ -63,6 +73,8 @@ namespace Lords_of_the_Sword
         {
             MousePos.X = e.X;
             MousePos.Y = e.Y;
+
+            MousePos = Window.MapPixelToCoords(new Vector2i((int)MousePos.X, (int)MousePos.Y));
         }
 
         private static void Window_Closed(object sender, EventArgs e)

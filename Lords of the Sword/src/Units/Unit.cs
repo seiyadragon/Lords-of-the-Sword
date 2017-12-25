@@ -8,6 +8,7 @@ namespace Lords_of_the_Sword.src.Units
 {
     class Unit
     {
+        public string Name;
         public int Gender;
         public int SexualPreference;
 
@@ -19,11 +20,13 @@ namespace Lords_of_the_Sword.src.Units
         public int Agi;
         public int Int;
 
-        public Unit(int level = 1, int gender = 3, int sp = 4)
+        public Unit(string name, int level = 1, int gender = 3, int sp = 4)
         {
             Random r = new Random();
 
             Lvl = 1;
+
+            Name = name;
 
             if (level > 1)
                 for (int i = 0; i < level; i++)
