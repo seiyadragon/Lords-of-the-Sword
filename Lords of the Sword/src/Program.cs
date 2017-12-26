@@ -112,13 +112,13 @@ namespace Lords_of_the_Sword
             {
                 if (num == 1)
                 {
-                    t[i] = new Tile(new Vector2f(i * 0.8f, .59f * y), TileType.Grassland);
+                    t[i] = new Tile(new Vector2f(i * 0.8f, .59f * y), TileType.Grassland, false);
                     num = 2;
                 }
 
                 else if (num == 2)
                 {
-                    t[i] = new Tile(new Vector2f(i * 0.8f, .59f * y - 0.26f), TileType.Grassland);
+                    t[i] = new Tile(new Vector2f(i * 0.8f, .59f * y - 0.26f), TileType.Grassland, true);
                     num = 1;
                 }
             }

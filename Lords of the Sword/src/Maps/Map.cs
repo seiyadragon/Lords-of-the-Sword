@@ -35,23 +35,41 @@ namespace Lords_of_the_Sword.Maps
 
                 Tiles[i].ID = i;
 
+                for (int j = 0; j < 6; j++)
+                    Tiles[i].AdjacentTiles[j] = null;
+            }
+
+            for (int i = 0; i < Tiles.Length; i++)
+            {
                 if (i - 24 >= 0)
                     Tiles[i].AdjacentTiles[0] = Tiles[i - 24];
 
-                if (i - 23 >= 0)
-                    Tiles[i].AdjacentTiles[1] = Tiles[i - 23];
-
-                if (i + 1 < 288)
-                    Tiles[i].AdjacentTiles[2] = Tiles[i + 1];
-
                 if (i + 24 < 288)
-                    Tiles[i].AdjacentTiles[3] = Tiles[i + 24];
+                    Tiles[i].AdjacentTiles[1] = Tiles[i + 24];
 
                 if (i - 1 >= 0)
-                    Tiles[i].AdjacentTiles[4] = Tiles[i - 1];
+                    Tiles[i].AdjacentTiles[2] = Tiles[i - 1];
 
-                if (i - 25 >= 0)
-                    Tiles[i].AdjacentTiles[5] = Tiles[i - 25];
+                if (i + 1 < 288)
+                    Tiles[i].AdjacentTiles[3] = Tiles[i + 1];
+
+                if (Tiles[i].Top)
+                {
+                    if (i - 25 >= 0)
+                        Tiles[i].AdjacentTiles[4] = Tiles[i - 25];
+
+                    if (i - 23 >= 0)
+                        Tiles[i].AdjacentTiles[5] = Tiles[i - 23];
+                }
+
+                if (!Tiles[i].Top)
+                {
+                    if (i + 25 < 288)
+                        Tiles[i].AdjacentTiles[4] = Tiles[i + 25];
+
+                    if (i + 23 < 288)
+                        Tiles[i].AdjacentTiles[5] = Tiles[i + 23];
+                }
             }
         }
 
