@@ -29,6 +29,7 @@ namespace Lords_of_the_Sword
         public static List<Party> Parties = new List<Party>();
 
         public static Map CurrentMap;
+        public static Panel MainPanel;
 
         static void Main(string[] args)
         {
@@ -40,7 +41,9 @@ namespace Lords_of_the_Sword
             Window.MouseButtonPressed += Window_MouseButtonPressed;
             Window.MouseButtonReleased += Window_MouseButtonReleased;
 
-            TileMenu tm = new TileMenu();
+            MainPanel = Panel.createMainPanel();
+
+            MainPanel.addComponent(new TestComp(MainPanel.SlotPositions[9]), 9);
 
             CurrentMap = createMap("res/Main.map");
             Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 10));
@@ -55,7 +58,7 @@ namespace Lords_of_the_Sword
                 for (int i = 0; i < Parties.Count; i++)
                     Parties[i].update(Window);
 
-                tm.update(Window);
+                MainPanel.update(Window);
 
                 Window.SetView(MainCamera);
                 Window.Display();

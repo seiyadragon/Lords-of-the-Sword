@@ -57,7 +57,7 @@ namespace Lords_of_the_Sword.Maps
         {
             Window.Draw(DrawSprite);
 
-            if (checkHovering(Window) && !TileMenu.isOpen)
+            if (checkHovering(Window))
                 hover(Window);
         }
 
