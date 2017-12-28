@@ -61,6 +61,9 @@ namespace Lords_of_the_Sword.src.Groups
             CurrentTile = tileID;
             Tile tile = Program.CurrentMap.Tiles[CurrentTile];
             Draw.Position = tile.PartyPos;
+
+            if (!TileTools.isTileTypeEmpty(tile.Type) && Program.CurrentMap.Tiles[CurrentTile].isEmpty)
+                Program.MainPanel.addPanel(Panel.createCityPanel());
         }
 
         public void Camp()

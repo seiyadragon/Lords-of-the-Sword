@@ -31,6 +31,8 @@ namespace Lords_of_the_Sword
         public static Map CurrentMap;
         public static Panel MainPanel;
 
+        public static Font MainFont;
+
         static void Main(string[] args)
         {
             Window = new RenderWindow(new VideoMode(1280, 720), "Lords of the Sword", Styles.Default);
@@ -41,9 +43,9 @@ namespace Lords_of_the_Sword
             Window.MouseButtonPressed += Window_MouseButtonPressed;
             Window.MouseButtonReleased += Window_MouseButtonReleased;
 
-            MainPanel = Panel.createMainPanel();
+            MainFont = new Font("res/Travelling.ttf");
 
-            MainPanel.addComponent(new TestComp(MainPanel.SlotPositions[9]), 9);
+            MainPanel = Panel.createMainPanel();
 
             CurrentMap = createMap("res/Main.map");
             Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 10));
@@ -59,6 +61,11 @@ namespace Lords_of_the_Sword
                     Parties[i].update(Window);
 
                 MainPanel.update(Window);
+
+                if (MainPanel.Panels.Count > 0)
+                    if (MainPanel.Panels[MainPanel.Panels.Count - 1].isMouseOverSlot(MainPanel.Panels[MainPanel.Panels.Count - 1].SlotPositions.Length - 1))
+                        if (isButtonPressed((int)Mouse.Button.Left))
+                            MainPanel.popBackPanel();
 
                 Window.SetView(MainCamera);
                 Window.Display();

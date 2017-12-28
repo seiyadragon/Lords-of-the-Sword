@@ -57,7 +57,7 @@ namespace Lords_of_the_Sword.Maps
         {
             Window.Draw(DrawSprite);
 
-            if (checkHovering(Window))
+            if (checkHovering(Window) && Program.MainPanel.Panels.Count == 0)
                 hover(Window);
         }
 
@@ -67,9 +67,6 @@ namespace Lords_of_the_Sword.Maps
 
             if (Program.isButtonPressed((int)Mouse.Button.Left))
                 Program.Parties[0].move(ID, false);
-
-            if (Program.isButtonPressed((int)Mouse.Button.Right))
-                Console.WriteLine(Position);
         }
 
         private bool checkHovering(RenderWindow Window)

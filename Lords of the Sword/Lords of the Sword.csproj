@@ -57,7 +57,7 @@
     <Compile Include="src\Groups\Party.cs" />
     <Compile Include="src\Gui\GuiComponent.cs" />
     <Compile Include="src\Gui\Panel.cs" />
-    <Compile Include="src\Gui\TestComp.cs" />
+    <Compile Include="src\Gui\GameText.cs" />
     <Compile Include="src\Maps\Map.cs" />
     <Compile Include="src\Maps\Tile.cs" />
     <Compile Include="src\Maps\TileTools.cs" />
@@ -68,6 +68,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="res\Main.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="res\Travelling.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
