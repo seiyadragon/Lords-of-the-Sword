@@ -16,11 +16,12 @@ namespace Lords_of_the_Sword.src.Gui
         public String text;
         public Text Draw;
 
-        public GameText(string text, Vector2f pos)
-            : base(pos, true)
+        public GameText(string text, Vector2f pos, Color color, bool hover = false)
+            : base(pos, true, hover)
         {
             this.text = text;
             Draw = new Text();
+            Draw.Color = color;
             Draw.Font = Program.MainFont;
             Draw.DisplayedString = text;
             Draw.Position = pos;

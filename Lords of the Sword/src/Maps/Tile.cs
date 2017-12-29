@@ -66,7 +66,12 @@ namespace Lords_of_the_Sword.Maps
             Window.Draw(Selection);
 
             if (Program.isButtonPressed((int)Mouse.Button.Left))
+            {
+                if (this == Program.CurrentMap.Tiles[Program.Parties[0].CurrentTile])
+                    Program.MainPanel.addPanel(Panel.createPartyPanel());
+
                 Program.Parties[0].move(ID, false);
+            }
         }
 
         private bool checkHovering(RenderWindow Window)

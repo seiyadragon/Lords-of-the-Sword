@@ -19,7 +19,8 @@ namespace Lords_of_the_Sword.Maps
         Ocean,
         Town,
         Castle,
-        City
+        City,
+        Farm
     }
 
     class TileTools
@@ -32,6 +33,7 @@ namespace Lords_of_the_Sword.Maps
         public static Vector2f TownTexture = new Vector2f(0, 48);
         public static Vector2f CastleTexture = new Vector2f(32, 48);
         public static Vector2f CityTexture = new Vector2f(32 * 2, 48);
+        public static Vector2f FarmTexture = new Vector2f(32 * 3, 48);
 
         public static Vector2f getTileTypeTextureCoords(TileType type)
         {
@@ -52,6 +54,9 @@ namespace Lords_of_the_Sword.Maps
 
             if (type == TileType.City)
                 return CityTexture;
+
+            if (type == TileType.Farm)
+                return FarmTexture;
 
             return new Vector2f();
         }

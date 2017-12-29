@@ -22,7 +22,7 @@ namespace Lords_of_the_Sword.src.Groups
 
         Sprite Draw = new Sprite();
 
-        int CurrentTile;
+        public int CurrentTile;
 
         public int Morale;
 
@@ -62,8 +62,11 @@ namespace Lords_of_the_Sword.src.Groups
             Tile tile = Program.CurrentMap.Tiles[CurrentTile];
             Draw.Position = tile.PartyPos;
 
-            if (!TileTools.isTileTypeEmpty(tile.Type) && Program.CurrentMap.Tiles[CurrentTile].isEmpty)
+            if (Program.CurrentMap.Tiles[CurrentTile].Type == TileType.City || Program.CurrentMap.Tiles[CurrentTile].Type == TileType.Town)
                 Program.MainPanel.addPanel(Panel.createCityPanel());
+
+            if (Program.CurrentMap.Tiles[CurrentTile].Type == TileType.Farm)
+                Program.MainPanel.addPanel(Panel.createFarmPanel());
         }
 
         public void Camp()

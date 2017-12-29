@@ -48,7 +48,7 @@ namespace Lords_of_the_Sword
             MainPanel = Panel.createMainPanel();
 
             CurrentMap = createMap("res/Main.map");
-            Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 10));
+            Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 110));
 
             while (Window.IsOpen)
             {
@@ -61,11 +61,6 @@ namespace Lords_of_the_Sword
                     Parties[i].update(Window);
 
                 MainPanel.update(Window);
-
-                if (MainPanel.Panels.Count > 0)
-                    if (MainPanel.Panels[MainPanel.Panels.Count - 1].isMouseOverSlot(MainPanel.Panels[MainPanel.Panels.Count - 1].SlotPositions.Length - 1))
-                        if (isButtonPressed((int)Mouse.Button.Left))
-                            MainPanel.popBackPanel();
 
                 Window.SetView(MainCamera);
                 Window.Display();
@@ -183,6 +178,9 @@ namespace Lords_of_the_Sword
 
                 if (final[i] == 5)
                     array[i].setType(TileType.City);
+
+                if (final[i] == 6)
+                    array[i].setType(TileType.Farm);
             }
 
             return new Map(new Vector2f(15, 0), array);

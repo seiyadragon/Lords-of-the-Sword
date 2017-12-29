@@ -15,11 +15,13 @@ namespace Lords_of_the_Sword.src.Gui
     {
         protected Vector2f Position;
         public bool isText = false;
+        public bool Hover = false; 
 
-        public GuiComponent(Vector2f pos, bool text)
+        public GuiComponent(Vector2f pos, bool text = false, bool hover = false)
         {
             Position = pos;
             isText = text;
+            Hover = hover;
         }
 
         public abstract void update(RenderWindow Window);
