@@ -58,6 +58,7 @@
     <Compile Include="src\Gui\GuiComponent.cs" />
     <Compile Include="src\Gui\Panel.cs" />
     <Compile Include="src\Gui\GameText.cs" />
+    <Compile Include="src\Gui\PanelButtonFunctions.cs" />
     <Compile Include="src\Maps\Map.cs" />
     <Compile Include="src\Maps\Tile.cs" />
     <Compile Include="src\Maps\TileTools.cs" />

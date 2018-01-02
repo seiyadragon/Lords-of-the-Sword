@@ -55,39 +55,55 @@ namespace Lords_of_the_Sword.src.Gui
 
         public static Panel createCityPanel()
         {
-            Panel p = new Panel(5, new Color(100, 0, 100, 100), true, new Color(150, 0, 0, 100));
-            
-            p.addComponent(new GameText("Request audience with the leader", p.SlotPositions[0], Color.Blue), 0);
-            p.addComponent(new GameText("Visit the inn", p.SlotPositions[1], Color.Green), 1);
-            p.addComponent(new GameText("Visit the market", p.SlotPositions[2], Color.Yellow), 2);
-            p.addComponent(new GameText("Siege", p.SlotPositions[3], Color.Red), 3);
-            p.addComponent(new GameText("Leave", p.SlotPositions[4], Color.Magenta), 4);
+            Panel p = new Panel(10, new Color(100, 0, 100, 100), false, new Color(150, 0, 0, 100));
+
+            p.addComponent(new GameText("City", p.SlotPositions[0], Color.Blue, false, true), 0, true);
+            p.addComponent(new GameText("Request audience with the leader", p.SlotPositions[3], Color.Green, true), 3);
+            p.addComponent(new GameText("Visit the inn", p.SlotPositions[4], Color.Green, true), 4);
+            p.addComponent(new GameText("Visit the market", p.SlotPositions[5], Color.Yellow, true), 5);
+            p.addComponent(new GameText("Siege", p.SlotPositions[6], Color.Red, true), 6);
+            p.addComponent(new GameText("Leave", p.SlotPositions[9], Color.Magenta, true), 9);
 
             return p;
         }
 
         public static Panel createFarmPanel()
         {
-            Panel p = new Panel(5, new Color(100, 0, 100, 100), true, new Color(150, 0, 0, 100));
+            Panel p = new Panel(10, new Color(100, 0, 100, 100), false, new Color(150, 0, 0, 100));
 
-            p.addComponent(new GameText("Recruit peasents", p.SlotPositions[0], Color.Green), 0);
-            p.addComponent(new GameText("Buy food", p.SlotPositions[1], Color.Yellow), 1);
-            p.addComponent(new GameText("Steal food", p.SlotPositions[2], Color.Red), 2);
-            p.addComponent(new GameText("Kidnap peasents", p.SlotPositions[3], Color.Red), 3);
-            p.addComponent(new GameText("Leave", p.SlotPositions[4], Color.Magenta), 4);
+            p.addComponent(new GameText("Farm", p.SlotPositions[0], Color.Blue, false, true), 0, true);
+            p.addComponent(new GameText("Recruit peasents", p.SlotPositions[3], Color.Green, true), 3);
+            p.addComponent(new GameText("Buy food", p.SlotPositions[4], Color.Yellow, true), 4);
+            p.addComponent(new GameText("Steal food", p.SlotPositions[5], Color.Red, true), 5);
+            p.addComponent(new GameText("Kidnap peasents", p.SlotPositions[6], Color.Red, true), 6);
+            p.addComponent(new GameText("Leave", p.SlotPositions[9], Color.Magenta, true), 9);
 
             return p;
         }
 
         public static Panel createPartyPanel()
         {
-            Panel p = new Panel(5, new Color(100, 0, 100, 100), true, new Color(150, 0, 0, 100));
+            Panel p = new Panel(10, new Color(100, 0, 100, 100), false, new Color(150, 0, 0, 100));
 
-            p.addComponent(new GameText("Inventory", p.SlotPositions[0], Color.Green), 0);
-            p.addComponent(new GameText("Reputation", p.SlotPositions[1], Color.Green), 1);
-            p.addComponent(new GameText("Party", p.SlotPositions[2], Color.Green), 2);
-            p.addComponent(new GameText("Camp", p.SlotPositions[3], Color.Green), 3);
-            p.addComponent(new GameText("Continue on your journey", p.SlotPositions[4], Color.Magenta), 4);
+            p.addComponent(new GameText(Program.Parties[0].Leader.Name, p.SlotPositions[0], Color.Blue, false, true), 0, true);
+            p.addComponent(new GameText("Inventory", p.SlotPositions[3], Color.Green, true), 3);
+            p.addComponent(new GameText("Reputation", p.SlotPositions[4], Color.Green, true), 4);
+            p.addComponent(new GameText("Party", p.SlotPositions[5], Color.Green, true), 5);
+            p.addComponent(new GameText("Camp", p.SlotPositions[6], Color.Green, true), 6);
+            p.addComponent(new GameText("Continue on your journey", p.SlotPositions[9], Color.Magenta, true), 9);
+
+            return p;
+        }
+
+        public static Panel createMainMenuPanel()
+        {
+            Panel p = new Panel(10, new Color(100, 0, 100, 100), false, new Color(150, 0, 0, 100));
+
+            p.addComponent(new GameText("Lords of the Sword", p.SlotPositions[0], Color.Magenta, false, true), 0, true);
+            p.addComponent(new GameText("New game", p.SlotPositions[2], Color.Blue, true), 2);
+            p.addComponent(new GameText("Load game", p.SlotPositions[4], Color.Blue, true), 4);
+            p.addComponent(new GameText("Options", p.SlotPositions[6], Color.Blue, true), 6);
+            p.addComponent(new GameText("Exit", p.SlotPositions[9], Color.Red, true), 9);
 
             return p;
         }
@@ -118,12 +134,16 @@ namespace Lords_of_the_Sword.src.Gui
             return p;
         }
 
-        public void addComponent(GuiComponent component, int slot)
+        public void addComponent(GuiComponent component, int slot, bool centered = false)
         {
             if (component.isText)
             {
                 GameText gt = (GameText)component;
                 gt.Draw.CharacterSize = (uint)(500 / Slots.Length);
+
+                if (centered)
+                    gt.Draw.Position = new Vector2f(1280 / 2 - gt.Draw.CharacterSize, gt.Draw.Position.Y);
+
                 Slots[slot] = gt;
             }
             else Slots[slot] = component;
@@ -149,7 +169,13 @@ namespace Lords_of_the_Sword.src.Gui
 
                 if (Slots[Slots.Length - 1] != null)
                     if (isSlotClicked(Slots.Length - 1))
-                        ParentPanel.popBackPanel();
+                    {
+                        if (ParentPanel != null)
+                            ParentPanel.popBackPanel();
+
+                        else if (ParentPanel == null)
+                            Window.Close();
+                    }
             }
 
             for (int i = 0; i < Panels.Count; i++)
@@ -189,8 +215,6 @@ namespace Lords_of_the_Sword.src.Gui
 
                     if (Slots[i] != null)
                         Window.Draw(HoverShape);
-
-                    lastSelectedSlot = i;
                 }
             }
 
@@ -219,10 +243,11 @@ namespace Lords_of_the_Sword.src.Gui
 
                     if (Slots[i] != null)
                         Window.Draw(HoverShape);
-
-                    lastSelectedSlot = i;
                 }
             }
+
+            if (isMouseOverSlot(i))
+                lastSelectedSlot = i;
         }
     }
 }
