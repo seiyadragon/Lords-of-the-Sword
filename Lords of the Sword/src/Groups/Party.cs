@@ -35,7 +35,7 @@ namespace Lords_of_the_Sword.src.Groups
             move(tileID, true);
         }
 
-        public void update(RenderWindow Window)
+        public void update(RenderTexture Screen)
         {
             int totalUM = 0;
             for (int i = 0; i < Members.Count; i++)
@@ -44,7 +44,7 @@ namespace Lords_of_the_Sword.src.Groups
             if (Members.Count > 0)
                 Morale = totalUM / Members.Count;
 
-            Window.Draw(Draw);
+            Screen.Draw(Draw);
         }
 
         public void move(int tileID, bool ignoreAdjacent)

@@ -53,17 +53,17 @@ namespace Lords_of_the_Sword.Maps
             DrawSprite.TextureRect = new IntRect((Vector2i)TileTools.getTileTypeTextureCoords(type), new Vector2i(32, 48));
         }
 
-        public void update(RenderWindow Window)
+        public void update(RenderTexture Screen)
         {
-            Window.Draw(DrawSprite);
+            Screen.Draw(DrawSprite);
 
-            if (checkHovering(Window) && Program.MainPanel.Panels.Count == 0)
-                hover(Window);
+            if (checkHovering(Screen) && Program.MainPanel.Panels.Count == 0)
+                hover(Screen);
         }
 
-        private void hover(RenderWindow Window)
+        private void hover(RenderTexture Screen)
         {
-            Window.Draw(Selection);
+            Screen.Draw(Selection);
 
             if (Program.isButtonPressed((int)Mouse.Button.Left))
             {
@@ -74,7 +74,7 @@ namespace Lords_of_the_Sword.Maps
             }
         }
 
-        private bool checkHovering(RenderWindow Window)
+        private bool checkHovering(RenderTexture Screen)
         {
             Vector2f m = Program.MousePos;
 

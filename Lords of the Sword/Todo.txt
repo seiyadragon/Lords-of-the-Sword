@@ -1,0 +1,4 @@
+﻿Create an engine folder.
+Add things such as GameObject and GameState with separate render and update functions.
+Reorganize the code to fit this plan.
+Move the panel presets to a text file rather than being in code.

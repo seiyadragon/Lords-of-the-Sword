@@ -16,6 +16,7 @@ namespace Lords_of_the_Sword.src.Gui
         public static void newGameButton()
         {
             Program.Game = true;
+            Program.MainPanel.popBackPanel();
         }
     }
 }

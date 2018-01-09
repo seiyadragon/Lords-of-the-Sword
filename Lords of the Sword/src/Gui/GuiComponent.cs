@@ -24,6 +24,6 @@ namespace Lords_of_the_Sword.src.Gui
             Hover = hover;
         }
 
-        public abstract void update(RenderWindow Window);
+        public abstract void update(RenderTexture Screen);
     }
 }

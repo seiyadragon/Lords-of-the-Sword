@@ -156,16 +156,16 @@ namespace Lords_of_the_Sword.src.Gui
             return c;
         }
 
-        public void update(RenderWindow Window)
+        public void update(RenderTexture Screen)
         {
-            Window.Draw(Draw);
+            Screen.Draw(Draw);
 
             for (int i = 0; i < Slots.Length; i++)
             {
-                hoverEffect(i, Window);
+                hoverEffect(i, Screen);
 
                 if (Slots[i] != null)
-                    Slots[i].update(Window);
+                    Slots[i].update(Screen);
 
                 if (Slots[Slots.Length - 1] != null)
                     if (isSlotClicked(Slots.Length - 1))
@@ -174,7 +174,7 @@ namespace Lords_of_the_Sword.src.Gui
                             ParentPanel.popBackPanel();
 
                         else if (ParentPanel == null)
-                            Window.Close();
+                            Program.Exit();
                     }
             }
 
@@ -182,13 +182,13 @@ namespace Lords_of_the_Sword.src.Gui
             {
                 Panels[i].ParentPanel = this;
 
-                Panels[i].update(Window);
+                Panels[i].update(Screen);
             }
 
             frameCount++; 
         }
 
-        public void hoverEffect(int i, RenderWindow Window)
+        public void hoverEffect(int i, RenderTexture Screen)
         {
             if (HoverEffects)
             {
@@ -214,7 +214,7 @@ namespace Lords_of_the_Sword.src.Gui
                     }
 
                     if (Slots[i] != null)
-                        Window.Draw(HoverShape);
+                        Screen.Draw(HoverShape);
                 }
             }
 
@@ -242,7 +242,7 @@ namespace Lords_of_the_Sword.src.Gui
                     }
 
                     if (Slots[i] != null)
-                        Window.Draw(HoverShape);
+                        Screen.Draw(HoverShape);
                 }
             }
 

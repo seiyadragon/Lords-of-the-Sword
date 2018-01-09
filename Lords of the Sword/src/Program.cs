@@ -36,10 +36,15 @@ namespace Lords_of_the_Sword
         public static bool Game = false;
         private static Panel MainMenu;
 
+        private static RenderTexture Screen;
+        private static Sprite ScreenSprite = new Sprite();
+
         static void Main(string[] args)
         {
             Window = new RenderWindow(new VideoMode(1280, 720), "Lords of the Sword", Styles.Default);
             MainCamera = new View(new FloatRect(0, 0, 1280, 720));
+
+            Screen = new RenderTexture(1280, 720);
 
             Window.Closed += Window_Closed;
             Window.MouseMoved += Window_MouseMoved;
@@ -58,10 +63,12 @@ namespace Lords_of_the_Sword
             {
                 Window.DispatchEvents();
                 Window.Clear();
+                Screen.Clear();
+                Screen.SetView(MainCamera);
 
                 if (!Game)
                 {
-                    MainMenu.update(Window);
+                    MainMenu.update(Screen);
 
                     if (MainMenu.isSlotClicked(2))
                         PanelButtonFunctions.newGameButton();
@@ -69,15 +76,17 @@ namespace Lords_of_the_Sword
 
                 if (Game)
                 {
-                    CurrentMap.update(Window);
+                    CurrentMap.update(Screen);
 
                     for (int i = 0; i < Parties.Count; i++)
-                        Parties[i].update(Window);
+                        Parties[i].update(Screen);
 
-                    MainPanel.update(Window);
+                    MainPanel.update(Screen);
                 }
 
-                Window.SetView(MainCamera);
+                Screen.Display();
+                ScreenSprite.Texture = Screen.Texture;
+                Window.Draw(ScreenSprite);
                 Window.Display();
 
                 MouseButtonsLast = (bool[])MouseButtons.Clone();
@@ -99,7 +108,7 @@ namespace Lords_of_the_Sword
             MousePos.X = e.X;
             MousePos.Y = e.Y;
 
-            MousePos = Window.MapPixelToCoords(new Vector2i((int)MousePos.X, (int)MousePos.Y));
+            MousePos = Screen.MapPixelToCoords(new Vector2i((int)MousePos.X, (int)MousePos.Y));
         }
 
         private static void Window_Closed(object sender, EventArgs e)
@@ -199,6 +208,11 @@ namespace Lords_of_the_Sword
             }
 
             return new Map(new Vector2f(15, 0), array);
+        }
+
+        public static void Exit()
+        {
+            Window.Close();
         }
     }
 }

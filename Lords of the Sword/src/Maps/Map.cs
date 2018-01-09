@@ -73,10 +73,10 @@ namespace Lords_of_the_Sword.Maps
             }
         }
 
-        public void update(RenderWindow Window)
+        public void update(RenderTexture Screen)
         {
             for (int i = 0; i < Tiles.Length; i++)
-                Tiles[i].update(Window);
+                Tiles[i].update(Screen);
         }
     }
 }
