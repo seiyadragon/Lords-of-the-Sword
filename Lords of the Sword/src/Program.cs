@@ -51,12 +51,12 @@ namespace Lords_of_the_Sword
             Window.MouseButtonPressed += Window_MouseButtonPressed;
             Window.MouseButtonReleased += Window_MouseButtonReleased;
 
-            MainFont = new Font("res/Travelling.ttf");
+            MainFont = new Font("res/fonts/Travelling.ttf");
 
             MainPanel = Panel.createMainPanel();
             MainMenu = Panel.createMainMenuPanel();
 
-            CurrentMap = createMap("res/Main.map");
+            CurrentMap = createMap("res/map_templates/Main.map");
             Parties.Add(new Party(new Unit("Uthred of Bebbanburg", 25, 1, 3), 110));
 
             while (Window.IsOpen)

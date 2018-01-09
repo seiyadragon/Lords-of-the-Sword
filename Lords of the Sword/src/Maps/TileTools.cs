@@ -25,7 +25,7 @@ namespace Lords_of_the_Sword.Maps
 
     class TileTools
     {
-        public static Texture TileMap = new Texture("res/fantasyhextiles_v2.png");
+        public static Texture TileMap = new Texture("res/textures/fantasyhextiles_v2.png");
 
         public static Vector2f GrasslandTexture = new Vector2f(0, 0);
         public static Vector2f ForestTexture = new Vector2f(32 * 2, 0);

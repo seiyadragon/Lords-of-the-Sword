@@ -30,7 +30,7 @@ namespace Lords_of_the_Sword.src.Groups
         {
             Leader = leader;
 
-            Draw.Texture = new Texture("res/Flag.png");
+            Draw.Texture = new Texture("res/textures/Flag.png");
 
             move(tileID, true);
         }
