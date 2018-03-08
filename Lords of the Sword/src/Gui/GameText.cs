@@ -30,9 +30,14 @@ namespace Lords_of_the_Sword.src.Gui
                 Draw.Style = Text.Styles.Bold;
         }
 
-        public override void update(RenderTexture Screen)
+        public override void Render()
         {
-            Screen.Draw(Draw);
+            Program.Screen.Draw(Draw);
+        }
+
+        public override void Update()
+        {
+            
         }
     }
 }

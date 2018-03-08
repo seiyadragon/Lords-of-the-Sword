@@ -9,21 +9,19 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
+using Lords_of_the_Sword.src.Engine;
+
 namespace Lords_of_the_Sword.src.Gui
 {
-    abstract class GuiComponent
+    abstract class GuiComponent : GameObject
     {
-        protected Vector2f Position;
         public bool isText = false;
-        public bool Hover = false; 
+        public bool Hover = false;
 
-        public GuiComponent(Vector2f pos, bool text = false, bool hover = false)
+        public GuiComponent(Vector2f pos, bool text = false, bool hover = false) : base(pos)
         {
-            Position = pos;
             isText = text;
             Hover = hover;
         }
-
-        public abstract void update(RenderTexture Screen);
     }
 }

@@ -9,15 +9,15 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
+using Lords_of_the_Sword.src.Engine;
+
 namespace Lords_of_the_Sword.Maps
 {
-    class Map
+    class Map : GameObject
     {
-        public Vector2f Position;
-
         public Tile[] Tiles;
 
-        public Map(Vector2f pos, Tile[] tiles)
+        public Map(Vector2f pos, Tile[] tiles) : base(pos)
         {
             Position = pos;
 
@@ -73,10 +73,16 @@ namespace Lords_of_the_Sword.Maps
             }
         }
 
-        public void update(RenderTexture Screen)
+        public override void Render()
         {
             for (int i = 0; i < Tiles.Length; i++)
-                Tiles[i].update(Screen);
+                Tiles[i].Render();
+        }
+
+        public override void Update()
+        {
+            for (int i = 0; i < Tiles.Length; i++)
+                Tiles[i].Update();
         }
     }
 }

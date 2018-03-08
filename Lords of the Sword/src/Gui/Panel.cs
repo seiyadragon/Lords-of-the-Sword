@@ -11,10 +11,11 @@ using SFML.Audio;
 
 using Lords_of_the_Sword.src.Groups;
 using Lords_of_the_Sword.Maps;
+using Lords_of_the_Sword.src.Engine;
 
 namespace Lords_of_the_Sword.src.Gui
 {
-    class Panel
+    class Panel : GameObject
     {
         public List<Panel> Panels = new List<Panel>();
 
@@ -34,7 +35,7 @@ namespace Lords_of_the_Sword.src.Gui
 
         public Panel ParentPanel;
 
-        public Panel(int slots, Color panelColor, bool hovereffect, Color hovercolor)
+        public Panel(int slots, Color panelColor, bool hovereffect, Color hovercolor) : base(new Vector2f())
         {
             Draw.FillColor = panelColor;
             Slots = new GuiComponent[slots];
@@ -97,7 +98,7 @@ namespace Lords_of_the_Sword.src.Gui
 
         public static Panel createMainMenuPanel()
         {
-            Panel p = new Panel(10, new Color(100, 0, 100, 100), false, new Color(150, 0, 0, 100));
+            Panel p = new Panel(10, new Color(0, 0, 0, 245), false, new Color(150, 0, 0, 100));
 
             p.addComponent(new GameText("Lords of the Sword", p.SlotPositions[0], Color.Magenta, false, true), 0, true);
             p.addComponent(new GameText("New game", p.SlotPositions[2], Color.Blue, true), 2);
@@ -156,20 +157,34 @@ namespace Lords_of_the_Sword.src.Gui
             return c;
         }
 
-        public void update(RenderTexture Screen)
+        public override void Render()
         {
-            Screen.Draw(Draw);
+            
+        }
+
+        public override void Update()
+        {
+            Program.Screen.Draw(Draw);
 
             for (int i = 0; i < Slots.Length; i++)
             {
-                hoverEffect(i, Screen);
+                hoverEffect(i);
 
                 if (Slots[i] != null)
-                    Slots[i].update(Screen);
+                {
+                    Slots[i].Update();
+                    Slots[i].Render();
+                }
 
                 if (Slots[Slots.Length - 1] != null)
                     if (isSlotClicked(Slots.Length - 1))
                     {
+                        if (Slots[i] != null)
+                            Slots[i].Update();
+                        
+
+                        
+
                         if (ParentPanel != null)
                             ParentPanel.popBackPanel();
 
@@ -182,13 +197,13 @@ namespace Lords_of_the_Sword.src.Gui
             {
                 Panels[i].ParentPanel = this;
 
-                Panels[i].update(Screen);
+                Panels[i].Update();
             }
 
             frameCount++; 
         }
 
-        public void hoverEffect(int i, RenderTexture Screen)
+        public void hoverEffect(int i)
         {
             if (HoverEffects)
             {
@@ -214,7 +229,7 @@ namespace Lords_of_the_Sword.src.Gui
                     }
 
                     if (Slots[i] != null)
-                        Screen.Draw(HoverShape);
+                        Program.Screen.Draw(HoverShape);
                 }
             }
 
@@ -241,8 +256,7 @@ namespace Lords_of_the_Sword.src.Gui
                         frameCount = 0;
                     }
 
-                    if (Slots[i] != null)
-                        Screen.Draw(HoverShape);
+                    Program.Screen.Draw(HoverShape);
                 }
             }
 

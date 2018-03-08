@@ -10,7 +10,6 @@ namespace Lords_of_the_Sword.src.Units
     {
         public string Name;
         public int Gender;
-        public int SexualPreference;
 
         public int Morale;
 
@@ -35,10 +34,6 @@ namespace Lords_of_the_Sword.src.Units
             if (gender != 1 || gender != 2)
                 Gender = r.Next(1, 2);
             else Gender = gender;
-
-            if (sp != 1 || sp != 2 || sp != 3)
-                SexualPreference = r.Next(1, 3);
-            else SexualPreference = sp;
 
             if (Gender == 1)
             {

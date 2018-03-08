@@ -10,12 +10,12 @@ using SFML.Graphics;
 using SFML.Audio;
 
 using Lords_of_the_Sword.src.Gui;
+using Lords_of_the_Sword.src.Engine;
 
 namespace Lords_of_the_Sword.Maps
 {
-    class Tile
+    class Tile : GameObject
     {
-        public Vector2f Position;
         public TileType Type;
         public Sprite DrawSprite = new Sprite();
 
@@ -34,9 +34,8 @@ namespace Lords_of_the_Sword.Maps
 
         public int ID;
 
-        public Tile(Vector2f pos, TileType type, bool istop)
+        public Tile(Vector2f pos, TileType type, bool istop) : base(pos)
         {
-            Position = pos;
             Type = type;
             Top = istop;
             DrawSprite.Texture = TileTools.TileMap;
@@ -53,17 +52,20 @@ namespace Lords_of_the_Sword.Maps
             DrawSprite.TextureRect = new IntRect((Vector2i)TileTools.getTileTypeTextureCoords(type), new Vector2i(32, 48));
         }
 
-        public void update(RenderTexture Screen)
+        public override void Render()
         {
-            Screen.Draw(DrawSprite);
-
-            if (checkHovering(Screen) && Program.MainPanel.Panels.Count == 0)
-                hover(Screen);
+            Program.Screen.Draw(DrawSprite);
         }
 
-        private void hover(RenderTexture Screen)
+        public override void Update()
         {
-            Screen.Draw(Selection);
+            if (checkHovering() && Program.MainPanel.Panels.Count == 0)
+                hover();
+        }
+
+        private void hover()
+        {
+            Program.Screen.Draw(Selection);
 
             if (Program.isButtonPressed((int)Mouse.Button.Left))
             {
@@ -74,7 +76,7 @@ namespace Lords_of_the_Sword.Maps
             }
         }
 
-        private bool checkHovering(RenderTexture Screen)
+        private bool checkHovering()
         {
             Vector2f m = Program.MousePos;
 

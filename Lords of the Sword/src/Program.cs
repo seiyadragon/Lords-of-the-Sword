@@ -36,7 +36,7 @@ namespace Lords_of_the_Sword
         public static bool Game = false;
         private static Panel MainMenu;
 
-        private static RenderTexture Screen;
+        public static RenderTexture Screen;
         private static Sprite ScreenSprite = new Sprite();
 
         static void Main(string[] args)
@@ -68,7 +68,13 @@ namespace Lords_of_the_Sword
 
                 if (!Game)
                 {
-                    MainMenu.update(Screen);
+                    CurrentMap.Render();
+                    MainCamera.Rotate(0.001f);
+                    MainCamera.Zoom(1f);
+
+                    Screen.SetView(new View(new FloatRect(0, 0, 1280, 720)));
+                    MainMenu.Update();
+                    MainMenu.Render();
 
                     if (MainMenu.isSlotClicked(2))
                         PanelButtonFunctions.newGameButton();
@@ -76,12 +82,15 @@ namespace Lords_of_the_Sword
 
                 if (Game)
                 {
-                    CurrentMap.update(Screen);
+                    MainCamera.Reset(new FloatRect(0, 0, 1280, 720));
+                    CurrentMap.Render();
+                    CurrentMap.Update();
 
                     for (int i = 0; i < Parties.Count; i++)
                         Parties[i].update(Screen);
 
-                    MainPanel.update(Screen);
+                    MainPanel.Update();
+                    MainPanel.Render();
                 }
 
                 Screen.Display();
