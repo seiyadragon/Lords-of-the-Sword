@@ -92,7 +92,7 @@ namespace Lords_of_the_Sword
                     MainPanel.Update();
                     MainPanel.Render();
                 }
-
+                
                 Screen.Display();
                 ScreenSprite.Texture = Screen.Texture;
                 Window.Draw(ScreenSprite);
